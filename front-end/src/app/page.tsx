@@ -1,19 +1,28 @@
 'use client'
 
 import Header from "../components/Header"
-import DocumentCard from "../components/DocumentCard";
+import DocumentTable from "../components/DocumentTable"
 import Link from "next/link"
 import { Plus, Search } from 'lucide-react'
 
 export default function Home() {
+  const documentos = [
+    {
+      id: '001',
+      name: 'relatorio.pdf',
+      date: '10/04/2025',
+      status: 'Preservado'
+    }
+  ]
+
   return (
-    <main className="h-screen w-screen bg-gradient-to-br from-blue-50 to-white text-neutral-800">
+    <main className="min-h-screen w-full bg-gradient-to-br from-blue-50 to-white text-neutral-800">
       <Header />
       
       <div className="w-full h-full flex flex-col px-6 py-10 gap-4">
-        
-        <div className="flex gap-4 w-full flex-wrap">
-          
+
+        {/* Campo de pesquisa */}
+        <div className="flex justify-center gap-4 w-full flex-wrap mb-8">
           <div className="flex flex-1 justify-center items-center gap-2">
             <input
               type="text"
@@ -24,21 +33,23 @@ export default function Home() {
               <Search className="cursor-pointer" size={20} />
             </button>
           </div>
-
         </div>
 
-        <div className="flex flex-shrink-0 justify-center my-8">
-            <Link
-              href="/upload"
-              className="w-[20%] flex items-center bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition"
-            >
-              <Plus size={18} />
-              Preservar novo documento
-            </Link>
+        {/* Filtro por intervalo de datas */}
+        <div className="flex gap-4 justify-center items-center mb-8">
+            <input
+              type="date"
+              className="border border-neutral-300 rounded px-4 py-2"
+            />
+            <span>Até</span>
+            <input
+              type="date"
+              className="border border-neutral-300 rounded px-4 py-2"
+            />
         </div>
 
-        <div>
-          <DocumentCard />
+        <div className="flex flex-col items-center w-full">
+          <DocumentTable docs={documentos} />
         </div>
 
       </div>
