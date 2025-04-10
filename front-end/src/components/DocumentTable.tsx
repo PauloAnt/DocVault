@@ -50,9 +50,12 @@ export default function DocumentTable({ docs } : Props){
 
                             <td className='flex py-6 px-4 gap-2 justify-center items-center'>
                                 
-                                <Eye /> 
-                                
-                                <Download />
+                                <Link href={`/document/${1}`}>
+                                    <Eye /> 
+                                </Link>
+                                <Link href={`/upload/${1}`}>
+                                    <Download />
+                                </Link>
                             
                             </td>
                         </tr>
