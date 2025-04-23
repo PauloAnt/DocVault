@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import DocumentService from './document.service';
 import DocumentDTO from './dto/DocumentDTO';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -28,8 +28,17 @@ export class DocumentController {
     async insert(@Body() data: DocumentDTO){
         return this.service.insert(data);
     }
+
+    @Put('/file/:id')
+    @ApiOperation({ summary: 'Preservação de documento' })
+    @ApiResponse({ status: 200, description: 'Documento reprocessado com sucesso.' })
+    @ApiResponse({ status: 404, description: 'Documento não encontrado.' })
+    async filePreservation(@Param('id') id: string) {
+        return this.service.fileReprocess(id);
+    }
     
-    @Get(':id')
+    
+    @Delete(':id')
     @ApiOperation({ summary: 'Remover documento pelo ID' })
     @ApiResponse({ status: 404, description: 'ID não encontrado' })
     async delete(@Param('id') id: string){

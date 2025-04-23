@@ -4,11 +4,10 @@ import { UserService } from 'src/user/user.service';
 import { AuthDTO } from './dto/AuthDTO';
 import { AuthException } from './exception/AuthException';
 
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 
-import dotenv from "dotenv";
 import { JwtService } from '@nestjs/jwt';
-dotenv.config();
+
 
 @Injectable()
 export class AuthService {
@@ -31,6 +30,7 @@ export class AuthService {
             }
 
             const payload = {
+                id: user.id,
                 email: user.email,
                 username: user.username
             }
@@ -47,7 +47,8 @@ export class AuthService {
 
     async register(data: UserDTO){
         try{
-            data.password = await bcrypt.hash(data.password, 10);
+            data.password = bcrypt.hashSync(data.password, 10);
+            
             return await this.service.insert(data);
         }
         catch(err){

@@ -143,7 +143,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\paulo\\OneDrive\\Documentos\\Projetos\\Desafio - LedgerTec\\back-end\\generated\\prisma",
+      "value": "C:\\Users\\paulo\\OneDrive\\Documentos\\Desktop\\DesafioLedgerTec\\back-end\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -157,7 +157,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\paulo\\OneDrive\\Documentos\\Projetos\\Desafio - LedgerTec\\back-end\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\paulo\\OneDrive\\Documentos\\Desktop\\DesafioLedgerTec\\back-end\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

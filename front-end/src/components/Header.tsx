@@ -2,11 +2,16 @@
 
 import Link from "next/link"
 import { LogOut } from "lucide-react"
+import { useRouter } from 'next/navigation'
 
 export default function Header() {
+  const router = useRouter()
+
   const handleLogout = () => {
-    // lógica do logout
-    return
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('userId'); 
+
+    router.push('/login');
   }
 
   return (
