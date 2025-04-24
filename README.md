@@ -1,97 +1,113 @@
-# Sistema de Preservação Digital
+# 📂 Sistema de Preservacao Digital
 
-Este é um sistema completo de front-end e back-end para cadastro, visualização, filtragem e simulação da preservação de documentos digitais.
+---
 
 ## 🛠 Tecnologias Utilizadas
 
-- **Front-end:** Next.js 13 com App Router (React + TailwindCSS)
-- **Back-end:** NestJS + Prisma + PostgreSQL
-- **Autenticação:** JWT
-- **Persistência:** Docker (para banco de dados PostgreSQL)
-- **Simulação de Preservação:** Lógica baseada no fluxo do Archivematica
+- **Front-end:** Next.js 13 (App Router) + React + TailwindCSS  
+- **Back-end:** NestJS + Prisma + PostgreSQL  
+- **Autenticação:** JWT  
+- **Persistência:** Docker (PostgreSQL)  
+- **Simulação de Preservação:** Lógica baseada no fluxo do Archivematica  
 
 ---
 
-## 🚀 Como executar o projeto
+## 🚀 Como Executar o Projeto
 
-### Pré-requisitos
+### ⚙️ Pré-requisitos
 
-Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+Certifique-se de ter as seguintes ferramentas instaladas:
 
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
-- [Node.js](https://nodejs.org/) (v18 ou superior)
-
----
+- [Node.js (v18+)](https://nodejs.org/)
 
 ### 🔧 Subindo os containers com Docker
 
-1. No diretório do projeto (onde está o `docker-compose.yml`), execute:
+No diretório raiz do projeto (onde está o `docker-compose.yml`), execute:
 
 ```bash
 docker-compose up -d --build
-Isso irá subir os serviços de banco de dados PostgreSQL utilizados pelo sistema.
+```
 
-📦 Back-end
-Acesse a pasta back-end:
+Isso iniciará os serviços, incluindo o banco de dados PostgreSQL.
 
-cd back-end
+---
 
-Instale as dependências:
-npm install
+## 📦 Back-end
 
-Execute as migrações do banco com Prisma:
+1. Acesse a pasta do back-end:
+    ```bash
+    cd back-end
+    ```
 
-npx prisma migrate dev
+2. Instale as dependências:
+    ```bash
+    npm install
+    ```
 
-Inicie o servidor:
+3. Execute as migrações do banco de dados:
+    ```bash
+    npx prisma migrate dev
+    ```
 
-npm run start
+4. Inicie o servidor:
+    ```bash
+    npm run start
+    ```
 
+---
 
-💻 Front-end
-Acesse a pasta front-end:
+## 💻 Front-end
 
-cd front-end
+1. Acesse a pasta do front-end:
+    ```bash
+    cd front-end
+    ```
 
-Instale as dependências:
+2. Instale as dependências:
+    ```bash
+    npm install
+    ```
 
-npm install
-Rode o projeto:
+3. Rode o projeto:
+    ```bash
+    npm run dev
+    ```
 
-npm run dev
+---
 
+## ✅ Simulação de Preservação
 
-⚠️ Sobre o Archivematica
-Durante o desenvolvimento, a integração direta com o Archivematica não foi possível por incompatibilidades de ambiente, especialmente no uso de containers e restrições em ambientes como o Google Cloud Shell, que foram testados sem sucesso.
+Como a integração com o **Archivematica** não foi possível devido a incompatibilidades de ambiente, foi implementado um **mecanismo de simulação**:
 
-✅ Simulação de Preservação
-Como alternativa, foi implementado um mecanismo de simulação, que simula o comportamento do Archivematica ao preservar um documento:
+A cada envio de documento:
+- Um `sipId` aleatório é gerado (como o Archivematica faria).
+- Um **status de preservação** é definido aleatoriamente: `Preservado`, `Iniciada` ou `Falha`.
+- O documento é atualizado com esses dados, simulando o comportamento real.
 
-A cada envio de documento, o sistema:
+> A lógica está implementada no `DocumentService.ts` (NestJS) e pode ser facilmente adaptada para uma integração real via API REST.
 
-Gera um sipId aleatório (como o Archivematica faria).
+---
 
-Define aleatoriamente um status de preservação: Preservado, Iniciada ou Falha.
+## 🧚‍♂️ Funcionalidades
 
-Atualiza o documento com esses valores para simular a resposta do processo de preservação.
+- Cadastro e autenticação de usuários  
+- Upload de documentos com simulação de preservação  
+- Filtros por metadados e datas  
+- Visualização detalhada de documentos  
+- Download de documentos preservados  
+- Ações protegidas por autenticação JWT  
 
-Essa lógica está implementada no serviço do NestJS (DocumentService.ts) e pode ser adaptada facilmente no futuro para se conectar com o Archivematica real via API REST.
+---
 
-🧪 Funcionalidades
-Cadastro e autenticação de usuários
+## ⚠️ Considerações sobre o Archivematica
 
-Upload e simulação de preservação de documentos
+> A integração direta com o Archivematica requer um ambiente compatível (ex: Linux bare-metal ou VM com Docker completo). Ambientes testados como Google Cloud Shell apresentaram restrições.
 
-Filtros por metadados e datas
+---
 
-Visualização detalhada de cada documento
+## 📝 Considerações Finais
 
-Download de documentos preservados
+Este projeto tem como objetivo demonstrar um **fluxo completo de preservação digital**, com possibilidade futura de **integração real com o Archivematica**.
 
-Ações protegidas com autenticação JWT
-
-📝 Considerações Finais
-Este projeto foi desenvolvido com o objetivo de demonstrar um fluxo completo de preservação digital, com possibilidade de integração futura ao Archivematica real.
-
-Se desejar testar a integração real com o Archivematica, será necessário um ambiente compatível com seus serviços (Linux bare-metal ou VM dedicada com Docker completo).
